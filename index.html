@@ -1,0 +1,106 @@
+<script type="importmap">
+  {
+    "imports": {
+      "@google/genai": "https://esm.sh/@google/genai@^0.7.0",
+      "gifenc": "https://cdn.jsdelivr.net/npm/gifenc@^1.0.3/+esm"
+    }
+  }
+</script>
+<div class="app-container">
+  <header>
+    <h1>Magical GIF Maker</h1>
+    <p>Turn your ideas into fun animated doodles</p>
+    <button id="settings-toggle" class="settings-toggle-button" aria-label="Open settings">
+      <i class="fas fa-cog"></i>
+    </button>
+  </header>
+
+  <div class="input-container">
+    <div class="input-field">
+      <i class="fas fa-wand-magic-sparkles input-icon"></i>
+      <input
+        type="text"
+        id="prompt-input"
+        value="a shiba inu eating ice-cream"
+        placeholder="Describe your animation..."
+      />
+    </div>
+    <button id="generate-button" class="generate-button">
+      <span>Generate Magic</span>
+      <i class="fas fa-sparkles"></i>
+    </button>
+  </div>
+
+  <div class="generation-container">
+    <div class="tabs">
+      <button class="tab-button active" data-tab="frames">Frames</button>
+      <button class="tab-button" data-tab="output">Output</button>
+    </div>
+
+    <div class="tab-content active" id="frames-content">
+      <div class="frames-container" id="frames-container">
+        <!-- Frames will appear here -->
+      </div>
+    </div>
+
+    <div class="tab-content" id="output-content">
+      <div class="result-container" id="result-container">
+        <!-- Final GIF will appear here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="status-container">
+    <div class="status-display" id="status-display"></div>
+  </div>
+
+  <div id="settings-panel" class="settings-panel">
+    <div class="settings-panel-header">
+      <h2>Custom Instructions</h2>
+      <button id="close-settings-button" class="close-btn" aria-label="Close settings">&times;</button>
+    </div>
+    <div class="settings-panel-content">
+      <div class="instruction-group">
+        <label for="system-orchestrator-instruction">System Orchestrator</label>
+        <textarea id="system-orchestrator-instruction" rows="10">**Role: Creative Prompt Expander**
+Your task is to take a user's simple idea for a GIF and expand it into a rich, descriptive prompt for an AI image generator. Focus on creating a prompt for a **doodle-style animation on a white background**.
+
+**Analysis & Expansion Steps:**
+1.  **Identify Core Subject:** What is the main person, animal, or object?
+2.  **Add Specificity:** If the user says "a dog", make it "a scruffy terrier with a wagging tail". If "a person", add neutral but distinct features like "a person with curly hair and glasses".
+3.  **Incorporate Action:** The core of the animation is subtle motion. Describe this. "wiggling", "shimmering", "gently bouncing", "steam rising".
+4.  **Define Style:** Always include "doodle style," "cartoonish," or "simple hand-drawn sketch."
+5.  **Handle Text:** If text is requested (e.g., 'with the caption "Hello!"'), format it clearly: 'with the caption "Hello!" below the subject'.
+6.  **Constraint Adherence:** Ensure the final output is a single, concise descriptive sentence. Do not include instructions, only the final prompt string for the next AI.
+
+**Example:**
+- User Input: "a happy coffee cup"
+- Your Output: "A happy cartoon coffee cup with steam gently rising from it, wiggling with joy."</textarea>
+      </div>
+      <div class="instruction-group">
+        <label for="ai-supervisor-instruction">Frame Generation Supervisor</label>
+        <textarea id="ai-supervisor-instruction" rows="12">You are an expert animator creating a single frame for a doodle-style animation.
+
+Generate **frame number {{frame_number}} of {{total_frames}}** for a sequence depicting: {{prompt}}.
+
+The animation should be smooth and fluid. Ensure this frame is a logical progression from the previous one.
+
+**Mandatory Frame Requirements:**
+- **Style:** Simple, vibrant, varied-colored doodle/hand-drawn sketch.
+- **Background:** MUST be a plain, solid white background. No other elements or colors.
+- **Format:** Square image (1:1 aspect ratio).
+- **Quality:** High-resolution, no watermarks, black bars, letterboxing, or cropping. The doodle must be fully visible and centered.
+- **Continuity:** The position and appearance of the subject should be consistent with a smooth animation sequence.</textarea>
+      </div>
+    </div>
+  </div>
+</div><a href="/" aria-label="Home" class="brand-link">
+<img
+src="https://andiegogiap.com/assets/aionex-icon-256.png"
+alt="AIONEX"
+width="128" height="128"
+style="height:40px;width:auto;display:block"
+loading="eager" decoding="async"
+/>
+</a>
+<link rel="icon" href="https://andiegogiap.com/assets/favicon.ico" sizes="any"> for my .ico
