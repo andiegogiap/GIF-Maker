@@ -24,7 +24,12 @@
         value="a shiba inu eating ice-cream"
         placeholder="Describe your animation..."
       />
+      <button id="upload-button" class="icon-button" aria-label="Upload starting image">
+        <i class="fas fa-image"></i>
+      </button>
+      <input type="file" id="image-upload-input" accept="image/*" style="display: none;" />
     </div>
+    <div id="image-preview-container"></div>
     <button id="generate-button" class="generate-button">
       <span>Generate Magic</span>
       <i class="fas fa-sparkles"></i>
@@ -94,13 +99,4 @@ The animation should be smooth and fluid. Ensure this frame is a logical progres
       </div>
     </div>
   </div>
-</div><a href="/" aria-label="Home" class="brand-link">
-<img
-src="https://andiegogiap.com/assets/aionex-icon-256.png"
-alt="AIONEX"
-width="128" height="128"
-style="height:40px;width:auto;display:block"
-loading="eager" decoding="async"
-/>
-</a>
-<link rel="icon" href="https://andiegogiap.com/assets/favicon.ico" sizes="any"> for my .ico
+</div>

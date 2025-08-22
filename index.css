@@ -146,34 +146,6 @@ header p {
   position: relative;
 }
 
-.status-bar {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.status-text {
-  font-size: 0.9em;
-  color: #666;
-  font-weight: 500;
-}
-
-.progress-bar {
-  height: 6px;
-  background-color: var(--input-background);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
 .tabs {
   display: flex;
   margin-bottom: 20px;
@@ -225,7 +197,6 @@ header p {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
-  margin-bottom: 30px;
 }
 
 .frame {
@@ -296,75 +267,75 @@ header p {
 
 .result-container img {
   max-width: 100%;
+  max-height: 500px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .download-button {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--primary-color);
+  bottom: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
+  font-size: 1.2rem;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
+  opacity: 0.7;
 }
 
 .download-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(1.1);
+  opacity: 1;
 }
 
 .status-container {
-  padding-top: 1em;
-  min-height: 1.6em;
+  margin-top: 20px;
+  text-align: center;
 }
 
-/* Settings Panel */
+.status-display {
+  color: var(--text-color);
+  font-weight: 500;
+  min-height: 1.6em; /* reserve space to prevent layout shift */
+}
+
 .settings-toggle-button {
   position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  background: transparent;
-  border: 1px solid var(--primary-light);
-  color: var(--primary-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.5rem;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
+  opacity: 0.6;
   transition: all 0.3s ease;
 }
 
 .settings-toggle-button:hover {
-  background: var(--primary-light);
-  color: white;
-  transform: translateY(-50%) rotate(45deg);
+  opacity: 1;
+  transform: rotate(45deg);
 }
 
 .settings-panel {
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: calc(-1 * var(--settings-panel-width));
+  right: -100%; /* Initially hidden */
   width: var(--settings-panel-width);
   height: 100%;
   background-color: var(--card-color);
-  border-left: 1px solid var(--primary-light);
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
 }
@@ -378,12 +349,11 @@ header p {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid var(--primary-light);
+  border-bottom: 1px solid var(--input-background);
 }
 
 .settings-panel-header h2 {
-  font-size: 1.2rem;
-  color: var(--primary-color);
+  font-size: 1.5rem;
   margin: 0;
 }
 
@@ -391,10 +361,16 @@ header p {
   background: none;
   border: none;
   font-size: 2rem;
-  cursor: pointer;
+  font-weight: 300;
   color: var(--text-color);
-  line-height: 1;
-  padding: 0 5px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  opacity: 1;
+  transform: rotate(90deg);
 }
 
 .settings-panel-content {
@@ -417,50 +393,53 @@ header p {
 .instruction-group textarea {
   width: 100%;
   background-color: var(--input-background);
-  border: 1px solid var(--primary-light);
+  border: 1px solid transparent;
   border-radius: 8px;
   padding: 10px;
-  font-size: 0.9rem;
+  font-family: monospace;
+  font-size: 0.9em;
   color: var(--text-color);
   resize: vertical;
-  min-height: 150px;
-  font-family: 'Courier New', Courier, monospace;
+  transition: all 0.3s ease;
 }
 
 .instruction-group textarea:focus {
   outline: none;
+  border-color: var(--primary-light);
   box-shadow: 0 0 0 2px var(--primary-light);
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .app-container {
-    padding: 20px;
-    padding-right: 15px;
-  }
-  
-  :root {
-    --settings-panel-width: 280px;
-  }
+.icon-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  opacity: 0.6;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 10px;
+  transition: all 0.3s ease;
+}
 
+.icon-button:hover {
+  opacity: 1;
+  color: var(--primary-color);
+}
+
+#image-preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: -15px; /* Pull it up a bit */
+  margin-bottom: 15px;
+  display: none; /* Hidden by default */
+}
+
+@media (max-width: 480px) {
+  .settings-panel {
+    width: 100%;
+  }
   h1 {
     font-size: 2em;
-  }
-  
-  header p {
-    display: none;
-  }
-  
-  .settings-toggle-button {
-    right: -10px;
-  }
-
-  .frames-container {
-    gap: 10px;
-  }
-
-  .frame {
-    width: 100px;
-    height: 100px;
   }
 }
